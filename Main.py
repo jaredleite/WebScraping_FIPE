@@ -10,6 +10,7 @@ arq = os.getcwd() + '/fipe_2023.csv'
 def consultas(arquivo):
     """
     consultas
+    search
     """
 
     if not os.path.exists(arquivo):
@@ -21,6 +22,7 @@ def consultas(arquivo):
             csvfile.close()
 
     consulta = ConsultaFipe()
+
     datas = consulta.captura_datas()
 
     with open(arquivo, newline='', encoding="utf-8") as csvfile:
@@ -35,33 +37,22 @@ def consultas(arquivo):
 
     datas = consulta.captura_datas()
     i_data = datas.index(data_final)
-    # print("\n")
-    #print(datas, i_data)
-    # print("\n")
     consulta.select_data(data_final)
     marcas = consulta.captura_marcas()
     i_marca = marcas.index(marca_final)
-    #print(marcas, i_marca)
     consulta.select_marca(marca_final)
     modelos = consulta.captura_modelos()
     i_modelo = modelos.index(modelo_final)
-    #print(modelos, i_modelo)
     consulta.select_modelo(modelo_final)
     anos = consulta.captura_anos()
-    # print(datas)
     i_ano = anos.index(ano_final)
-    #print(anos, i_ano)
 
     FLAG_MARCAS = False
     FLAG_MODELOS = False
     FLAG_ANOS = False
 
-    # print(i_ano)
-    # print(len(anos))
-
     if i_ano == len(anos) - 1:
         FLAG_ANOS = True
-        # print("\n\ni_ano\n\n")
         if i_modelo == len(modelos) - 1:
             FLAG_MODELOS = True
             if i_marca == len(marcas) - 1:

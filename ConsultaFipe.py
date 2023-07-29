@@ -23,6 +23,7 @@ class ConsultaFipe:
         self.modelo = None
         self.ano = None
 
+        # Seleniuum options
         self.options = Options()
         self.options.add_argument('window-size=400,800')
         self.options.add_argument('--headless')
@@ -59,12 +60,13 @@ class ConsultaFipe:
     def captura_datas(self):
         """
         captura_datas
+        get date
         """
         return [o.text for o in self.input_select_date.options]
 
     def select_data(self, data):
         """
-        select_data
+        select in data in droplist
         """
         self.data = data
         self.input_select_date.select_by_visible_text(data)
@@ -73,12 +75,14 @@ class ConsultaFipe:
     def captura_marcas(self):
         """
         captura_marcas
+        get brand
         """
         return [o.text for o in self.input_select_brand.options]
 
     def select_marca(self, marca):
         """
         select_marca
+        select brand in droplist
         """
         self.marca = marca
         self.input_select_brand.select_by_visible_text(marca)
@@ -87,12 +91,14 @@ class ConsultaFipe:
     def captura_modelos(self):
         """
         captura_modelo
+        get model
         """
         return [o.text for o in self.input_select_model.options]
 
     def select_modelo(self, modelo):
         """
         select_modelo
+        select model in droplist
         """
         self.modelo = modelo
         self.input_select_model.select_by_visible_text(modelo)
@@ -101,48 +107,47 @@ class ConsultaFipe:
     def captura_anos(self):
         """
         captura_ano
+        get year
         """
         return [o.text for o in self.input_select_year_fuel.options]
 
     def select_ano(self, ano):
         """
         select_ano
+        select year in droplist
         """
         self.ano = ano
         self.input_select_year_fuel.select_by_visible_text(ano)
-        # sleep(0.5)
 
     def consulta(self):
         """
         consulta
+        Search
         """
-        # self.select_data(data)
-        # self.select_marca(marca)
-        # self.select_modelo(modelo)
-        # self.select_ano(ano)
         self.botao_pesquisar.click()
-        # sleep(2)
         sleep(0.8)
 
         # Cod Fipe
+        # Fipe code
+
         cod_fipe = self.navegador.find_element(
             By.XPATH, '//*[@id="resultadoConsultacarroFiltros"]/table/tbody/tr[2]/td[2]/p').text
 
         # Cod Autenticacao
+        # Authent. code
+
         cod_aut = self.navegador.find_element(
             By.XPATH, '//*[@id="resultadoConsultacarroFiltros"]/table/tbody/tr[6]/td[2]/p').text
 
         # Data Consulta
+        # Search date
         data_consulta = self.navegador.find_element(
             By.XPATH, '//*[@id="resultadoConsultacarroFiltros"]/table/tbody/tr[7]/td[2]/p').text
 
         # Preco Medio
+        # Price
         preco = self.navegador.find_element(
             By.XPATH, '//*[@id="resultadoConsultacarroFiltros"]/table/tbody/tr[8]/td[2]/p').text
-
-        # return {"Mes_Ref": data, "Cod_FIPE": cod_fipe, "Marca": marca, "Modelo": modelo,
-        #        "Ano_Modelo": ano, "Autenticacao": cod_aut, "Data_Consulta": data_consulta,
-        #        "Preco_Medio": preco}
 
         return [self.data, cod_fipe, self.marca, self.modelo,
                 self.ano, cod_aut, data_consulta, preco]
@@ -150,9 +155,8 @@ class ConsultaFipe:
     def limpa_consulta(self):
         """
         limpa_consulta
+        clean search
         """
         self.botao_limpar = self.navegador.find_element(
             By.XPATH, '//*[@id="buttonLimparPesquisarcarro"]/a')
         self.botao_limpar.click()
-
-        # sleep(0.5)
