@@ -2,12 +2,9 @@ import os
 import csv
 from time import sleep
 import datetime
-#from ConsultaFipe import ConsultaFipe
-#from ConsultaFipe3 import ConsultaFipe
-from ConsultaFipe4 import ConsultaFipe
+from ConsultaFipe import ConsultaFipe
 
-arq = os.getcwd() + '/fipe_2016.csv'
-#arq = os.getcwd() + '/fipe_02.csv'
+arq = os.getcwd() + '/fipe_2023.csv'
 
 
 def consultas(arquivo):
