@@ -105,6 +105,8 @@ def consultas(arquivo):
                                 consulta.select_marca(marca)
 
         csvfile.close()
+        print('Concluido com sucesso')
+        print('Successfully concluded')
     return True
 
 
